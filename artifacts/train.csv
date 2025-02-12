@@ -1,4 +1,4 @@
-gender,Area,type,ctc,math_score,reading_score,writing_score
+gender,Area,type,ctc,math_score,verbal,logical
 female,South,Development,6.0,43,51,54
 male,North,Development,5.95,77,79,81
 male,North,Development,5.1,18,32,28
