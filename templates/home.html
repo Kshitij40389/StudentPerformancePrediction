@@ -3,72 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prediction Results</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Swabhav Techlabs - Prediction</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
+        .header {
+            background-color: #FFFFFF;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .logo img {
+            height: 40px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+        }
+        .contact-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .contact-btn:hover {
+            background-color: #d32f2f;
+        }
         .container {
-            max-width: 600px;
-            margin: 20px auto;
-            background: #fff;
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.9);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
-        }
-
-        img {
-            border-radius: 50%;
-            border: 2px solid #007bff;
-            padding: 5px;
-            transition: transform 0.3s ease;
-        }
-
-        img:hover {
-            transform: scale(1.1);
-        }
-
-        h1 {
             text-align: center;
+        }
+        h1 {
             font-size: 2rem;
             color: #007bff;
             margin-bottom: 20px;
-            text-transform: uppercase;
         }
-
         form {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-
         label {
             font-weight: bold;
-            font-size: 1rem;
         }
-
-        input[type="text"], input[type="number"], select {
+        input, select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 1rem;
-            background-color: #f9f9fb;
-            transition: border-color 0.3s ease, background-color 0.3s ease;
         }
-
-        input[type="text"]:focus, input[type="number"]:focus, select:focus {
-            border-color: #007bff;
-            outline: none;
-            background-color: #eef6ff;
-        }
-
         button {
             background-color: #007bff;
             color: #fff;
@@ -77,44 +86,36 @@
             border-radius: 4px;
             font-size: 1rem;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
         }
-
         button:hover {
             background-color: #0056b3;
-            transform: scale(1.05);
         }
-
-        #prediction-output {
-            margin-top: 30px;
+        footer {
             text-align: center;
-        }
-
-        #prediction-output h2 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        #result {
-            font-size: 1.2rem;
-            color: #007bff;
-            font-weight: bold;
-        }
-
-        select:hover {
-            cursor: pointer;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: auto;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <img src="logo.png" alt="Company Logo" style="max-width: 200px; height: auto;">
+    <header class="header">
+        <div class="logo">
+            <img src="https://swabhavtechlabs.com/assets/images/logos/swabhav-logo.svg" alt="Swabhav Techlabs Logo">
         </div>
+        <nav class="nav-links">
+            <a href="https://tsm.swabhavtechlabs.com/company/login">Mithril Login</a>
+            <a href="https://swabhav.ai/">Swabhav.AI</a>
+            <a href="https://swabhavventurelabs.com/">Swabhav Venturelabs</a>
+            <a href="https://swabhavtechlabs.com/contact-us" class="contact-btn">Contact Us</a>
+        </nav>
+    </header>
 
-        <h1>Prediction Result</h1>
-        <form action="{{ url_for('predict_datapoint')}}" method="post">
+    <div class="container">
+        <h1>Prediction Form</h1>
+        <form action="/predictdata" method="post">
             <label for="gender">Gender:</label>
             <select id="gender" name="gender" required>
                 <option value="" disabled selected>Select gender</option>
@@ -138,17 +139,18 @@
                 <option value="Support">Support</option>
             </select>
 
-            <label for="Verbal Ability">Reading Score:</label>
-            <input type="number" id="verbal" name="verbal" placeholder="Enter Reading Score" min="0" max="100" required>
+            <label for="verbal">Verbal Ability Score:</label>
+            <input type="number" id="verbal" name="verbal" placeholder="Enter Verbal Score" min="0" max="100" required>
 
-            <label for="Logical Ability">Writing Score:</label>
-            <input type="number" id="logical" name="logical" placeholder="Enter Writing Score" min="0" max="100" required>
+            <label for="logical">Logical Ability Score:</label>
+            <input type="number" id="logical" name="logical" placeholder="Enter Logical Score" min="0" max="100" required>
 
             <button type="submit">Predict</button>
         </form>
-        <h2> THE PREDICTION IS {{results}}</h2>
     </div>
 
-    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2025 Swabhav Techlabs | All Rights Reserved</p>
+    </footer>
 </body>
 </html>

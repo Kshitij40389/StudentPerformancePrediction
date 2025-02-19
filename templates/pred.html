@@ -3,114 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Swabhav Techlabs</title>
+    <title>Swabhav Techlabs - Prediction Result</title>
     <style>
-        /* Global styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f4f8;
+            background-color: #f4f4f4;
             color: #333;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
-        
-        /* Header Styles */
         .header {
             background-color: #FFFFFF;
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
         .logo img {
             height: 40px;
         }
-        
         .nav-links {
             display: flex;
             gap: 20px;
             align-items: center;
         }
-        
         .nav-links a {
             text-decoration: none;
             color: #333;
             font-size: 1rem;
-            display: inline-block;
         }
-        
-        .contact-btn {
-            background-color: #f44336;
-            color: white;
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .prediction-result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .assessment {
+            font-size: 1.2rem;
+            color: #d32f2f;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons a {
+            background-color: #007bff;
+            color: #fff;
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 4px;
             text-decoration: none;
             font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-        
-        .contact-btn:hover {
-            background-color: #d32f2f;
-        }
-
-        /* Main Content Section */
-        .main-content {
-            text-align: center;
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-
-        .main-content h2 {
-            font-size: 2rem;
-            color: #333;
-        }
-
-        .highlight {
-            color: #f44336;
-            font-weight: bold;
-        }
-
-        .btn {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            border-radius: 5px;
-            text-decoration: none;
+            margin: 10px;
             display: inline-block;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
         }
-
-        .btn:hover {
+        .buttons a:hover {
             background-color: #0056b3;
         }
-
-        /* Footer Styles */
         footer {
             text-align: center;
             padding: 20px;
             background-color: #333;
             color: white;
             margin-top: auto;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    
-    <!-- Header Section -->
     <header class="header">
         <div class="logo">
             <img src="https://swabhavtechlabs.com/assets/images/logos/swabhav-logo.svg" alt="Swabhav Techlabs Logo">
@@ -123,18 +105,26 @@
         </nav>
     </header>
 
-    <!-- Main Content Section -->
-    <div class="main-content">
-        <h2>Transform Your Business With Hyper-Personalized <span class="highlight">Talent</span> and <span class="highlight">Technology</span> Solutions</h2>
-        <p>At Swabhav, we unite top tech talent and visionary companies to engineer tomorrow. By solving industry challenges with strategic technology solutions and dynamic global talent solutions, we drive growth and innovation.</p>
-        <a href="https://swabhavtechlabs.com/index" class="btn">Explore Our Solutions</a>
-        <a href="http://127.0.0.1:5000/predictdata" class="btn" style="border: 1px solid #007BFF; background: white; color: #007BFF;">Start Prediction</a>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <p class="prediction-result">Predicted Category: <span class="highlight">{{ results }}</span></p>
+        <p class="assessment">
+            {% if results > 70 %}
+                Suggest talent an A-tier college
+            {% elif results >= 50 and results <= 70 %}
+                Suggests talent a B-tier college
+            {% else %}
+                The talent is not a good option to rely on
+            {% endif %}
+        </p>
+        <div class="buttons">
+            <a href="{{ url_for('predict_datapoint') }}">Make Another Prediction</a>
+            <a href="/">Go Home</a>
+        </div>
     </div>
 
-    <!-- Footer Section -->
     <footer>
         <p>&copy; 2025 Swabhav Techlabs | All Rights Reserved</p>
     </footer>
-
 </body>
 </html>
