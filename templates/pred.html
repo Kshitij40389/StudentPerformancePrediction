@@ -48,12 +48,12 @@
             text-align: center;
         }
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #007bff;
             margin-bottom: 20px;
         }
         .prediction-result {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #333;
             margin-bottom: 20px;
@@ -63,20 +63,35 @@
             color: #2c3e50;
         }
         .assessment {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: #d32f2f;
+            margin-top: 20px;
+        }
+        .college-list {
+            font-size: 1.3rem;
+            color: #333;
+            margin-top: 10px;
+            text-align: left;
+            display: inline-block;
+        }
+        .college-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .college-list li {
+            margin: 10px 0;
         }
         .buttons {
-            margin-top: 20px;
+            margin-top: 30px;
         }
         .buttons a {
             background-color: #007bff;
             color: #fff;
-            padding: 10px 20px;
+            padding: 15px 25px;
             border-radius: 4px;
             text-decoration: none;
-            font-size: 1rem;
-            margin: 10px;
+            font-size: 1.2rem;
+            margin: 15px;
             display: inline-block;
         }
         .buttons a:hover {
@@ -101,20 +116,49 @@
             <a href="https://tsm.swabhavtechlabs.com/company/login">Mithril Login</a>
             <a href="https://swabhav.ai/">Swabhav.AI</a>
             <a href="https://swabhavventurelabs.com/">Swabhav Venturelabs</a>
-            <a href="https://swabhavtechlabs.com/contact-us" class="contact-btn">Contact Us</a>
+            <a href="https://swabhavtechlabs.com/contact-us">Contact Us</a>
         </nav>
     </header>
 
     <div class="container">
         <h1>Prediction Result</h1>
-        <p class="prediction-result">Predicted Category: <span class="highlight">{{ results }}</span></p>
+        <p class="prediction-result">Predicted Math Score : <span class="highlight">{{ results }}</span></p>
         <p class="assessment">
-            {% if results > 70 %}
+            {% if results > 90 %}
                 Suggest talent an A-tier college
+                <div class="college-list">
+                    Colleges coming under this are:
+                    <ul>
+                        <li>NMIMS</li>
+                        <li>Symbiosis</li>
+                        <li>Mukesh Patel School of Technology</li>
+                    </ul>
+                </div>
+            {% elif results > 70 and results <= 90 %}
+                Suggest talent a B-tier college
+                <div class="college-list">
+                    Colleges coming under this are:
+                    <ul>
+                        <li>BITS Pilani</li>
+                        <li>KIIT</li>
+                        <li>Great Lakes Institute of Management</li>
+                    </ul>
+                </div>
+                <p>For more options</p>
+                <p>please check name sheet</p>
             {% elif results >= 50 and results <= 70 %}
-                Suggests talent a B-tier college
+                Suggest talent a C-tier college
+                <div class="college-list">
+                    Colleges coming under this are:
+                    <ul>
+                        <li>Amity</li>
+                        <li>IIM</li>
+                    </ul>
+                </div>
+                <p>For more options</p>
+                <p>please check name sheet</p>
             {% else %}
-                The talent is not a good option to rely on
+                The talent is not a good option to rely on.
             {% endif %}
         </p>
         <div class="buttons">
