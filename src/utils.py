@@ -24,7 +24,6 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, params):
             best_score = -float("inf")
             best_params = None
 
-            # If parameters exist for the model, perform a manual search
             if model_name in params and params[model_name]:
                 param_grid = params[model_name]
                 keys, values = zip(*param_grid.items())
@@ -33,7 +32,6 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, params):
                     try:
                         model.set_params(**param_dict)
                     except Exception as e:
-                        # Skip models that do not support parameter updates
                         continue
 
                     model.fit(X_train, y_train)
@@ -44,7 +42,6 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, params):
                         best_score = score
                         best_params = param_dict
 
-                # Set best parameters if found
                 if best_params:
                     try:
                         model.set_params(**best_params)

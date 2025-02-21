@@ -37,7 +37,6 @@ class ModelTrainer:
                 test_array[:, -1],
             )
 
-            # Define models and hyperparameters
             models = {
                 "Random Forest": RandomForestRegressor(),
                 "Decision Tree": DecisionTreeRegressor(),
@@ -55,15 +54,12 @@ class ModelTrainer:
                 "XGBoost": {"n_estimators": [50, 100], "learning_rate": [0.05, 0.1]},
                 "CatBoost": {"depth": [6, 8], "iterations": [100, 200]},
                 "AdaBoost": {"n_estimators": [50, 100], "learning_rate": [0.05, 0.1]},
-                # Linear Regression does not have hyperparameters
                 "Linear Regression": {},
             }
 
-            # Evaluate models
             model_report: dict = evaluate_models(X_train, y_train, X_test, y_test, models, params)
             logging.info(f"Model evaluation report: {model_report}")
 
-            # Select the best model
             best_model_name = max(model_report, key=model_report.get)
             best_model_score = model_report[best_model_name]
             best_model = models[best_model_name]
@@ -73,10 +69,8 @@ class ModelTrainer:
 
             logging.info(f"Best model: {best_model_name} with score: {best_model_score}")
 
-            # Save the best model
             save_object(self.model_trainer_config.trained_model_file_path, best_model)
 
-            # Test the best model
             return best_model_score
 
         except Exception as e:
